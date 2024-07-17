@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--
+    &lt;!&ndash; Storage Bean &ndash;&gt;
+    <bean id="storage" class="com.andrei.spring.mvc.Storage"/>
+
+    &lt;!&ndash; Service Beans &ndash;&gt;
+    <bean id="userService" class="com.andrei.spring.mvc.UserServiceImpl"/>
+    <bean id="eventService" class="com.andrei.spring.mvc.EventServiceImpl"/>
+    <bean id="ticketService" class="com.andrei.spring.mvc.TicketServiceImpl"/>
+
+    &lt;!&ndash; Facade Bean with Constructor-based Injection &ndash;&gt;
+    <bean id="bookingFacade" class="com.andrei.spring.mvc.BookingFacadeImpl">
+        <constructor-arg ref="userService"/>
+        <constructor-arg ref="eventService"/>
+        <constructor-arg ref="ticketService"/>
+    </bean>-->
+
+</beans>
