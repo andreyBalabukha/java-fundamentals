@@ -1,6 +1,6 @@
-package com.example.java_mp.dto;
+package com.example.java_mp.dto.response;
 
-public class TicketDto {
+public class TicketDtoRefactor {
 
     private Long id;
     private Long eventId;

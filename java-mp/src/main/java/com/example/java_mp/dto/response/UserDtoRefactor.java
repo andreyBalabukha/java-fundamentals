@@ -1,6 +1,6 @@
-package com.example.java_mp.dto;
+package com.example.java_mp.dto.response;
 
-public class UserDto {
+public class UserDtoRefactor {
 
         private Long id;
         private String name;

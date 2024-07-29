@@ -1,8 +1,8 @@
-package com.example.java_mp.dto;
+package com.example.java_mp.dto.response;
 
 import java.util.Date;
 
-public class EventDto {
+public class EventDtoResponse {
 
     private Long id;
     private String title;

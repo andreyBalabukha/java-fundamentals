@@ -1,10 +1,10 @@
 package com.example.java_mp.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.util.Date;
 
 @Entity
@@ -16,7 +16,13 @@ public class Event {
     private String title;
     private Date date;
 
+    public Event(String title, Date date) {
+        this.title = title;
+        this.date = date;
+    }
+
     public Event() {
+
     }
 
     public Long getId() {
