@@ -23,46 +23,25 @@ public class EventController {
 
     @GetMapping("/")
     public ResponseEntity<List<EventDtoResponse>> getAllEvents() {
-        try {
-            List<EventDtoResponse> eventsDto = eventService.getAllEvents();
-            return ResponseEntity.ok(eventsDto);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        List<EventDtoResponse> eventsDto = eventService.getAllEvents();
+        return ResponseEntity.ok(eventsDto);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<EventDtoResponse> getEventById(@PathVariable Long id) {
-        try {
-            EventDtoResponse eventDtoResponse = eventService.getEventById(id);
-            return ResponseEntity.ok(eventDtoResponse);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        EventDtoResponse eventDtoResponse = eventService.getEventById(id);
+        return ResponseEntity.ok(eventDtoResponse);
     }
 
     @PostMapping("/")
     public ResponseEntity<EventDtoResponse> createEvent(@RequestBody EventDtoRequest event) {
-
-        try {
-            EventDtoResponse eventDtoResponse = eventService.createEvent(event);
-            return ResponseEntity.ok(eventDtoResponse);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+         EventDtoResponse eventDtoResponse = eventService.createEvent(event);
+         return ResponseEntity.ok(eventDtoResponse);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
-        try {
-            eventService.deleteEvent(id);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        eventService.deleteEvent(id);
+        return ResponseEntity.ok().build();
     }
 }
