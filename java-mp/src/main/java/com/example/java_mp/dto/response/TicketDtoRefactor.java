@@ -1,41 +1,23 @@
 package com.example.java_mp.dto.response;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class TicketDtoRefactor {
 
+    @Getter
+    @Setter
     private Long id;
+
+    @Getter
+    @Setter
     private Long eventId;
+
+    @Getter
+    @Setter
     private String category;
+
+    @Getter
+    @Setter
     private String place;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
 }

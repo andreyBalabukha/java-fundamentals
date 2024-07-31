@@ -1,34 +1,21 @@
 package com.example.java_mp.dto.response;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 
 public class EventDtoResponse {
 
+    @Getter
+    @Setter
     private Long id;
+
+    @Getter
+    @Setter
     private String title;
+
+    @Getter
+    @Setter
     private Date date;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 }
