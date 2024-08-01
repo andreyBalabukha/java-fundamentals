@@ -73,7 +73,7 @@ public class EventService {
 
     public List<EventDtoResponse> findEventsAfterDate(Long date) {
         ZonedDateTime userDate = convertTimestampToZonedDateTime(date, "UTC");
-        List<Event> events =  eventRepository.findEventsAfterDate(userDate);
+        List<Event> events = eventRepository.findEventsAfterDate(userDate);
         List<EventDtoResponse> eventDtoResponses = new ArrayList<>();
 
         events.forEach(event -> eventDtoResponses.add(convertToDto(event)));

@@ -34,8 +34,8 @@ public class EventController {
 
     @PostMapping("/")
     public ResponseEntity<EventDtoResponse> createEvent(@RequestBody EventDtoRequest event) {
-         EventDtoResponse eventDtoResponse = eventService.createEvent(event);
-         return ResponseEntity.ok(eventDtoResponse);
+        EventDtoResponse eventDtoResponse = eventService.createEvent(event);
+        return ResponseEntity.ok(eventDtoResponse);
     }
 
     @DeleteMapping("/{id}")
