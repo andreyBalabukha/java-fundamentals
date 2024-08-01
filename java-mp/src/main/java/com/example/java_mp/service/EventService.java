@@ -8,6 +8,9 @@ import com.example.java_mp.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +34,13 @@ public class EventService {
         return eventDtoResponse;
     }
 
+    private static ZonedDateTime convertTimestampToZonedDateTime(long timestampInMillis, String timeZone) {
+        Instant instant = Instant.ofEpochMilli(timestampInMillis);
+        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(instant, ZoneId.of(timeZone));
+
+        return zonedDateTime;
+    }
+
     public EventDtoResponse getEventById(Long id) {
         Optional<Event> event = eventRepository.findById(id);
 
@@ -48,7 +58,8 @@ public class EventService {
     }
 
     public EventDtoResponse createEvent(EventDtoRequest eventRequest) {
-        Event event = new Event(eventRequest.title, eventRequest.date);
+        ZonedDateTime userDate = convertTimestampToZonedDateTime(eventRequest.date, "UTC");
+        Event event = new Event(eventRequest.title, userDate);
 
         return convertToDto(eventRepository.save(event));
     }
@@ -58,5 +69,15 @@ public class EventService {
             throw new EventNotFoundException("Event not found");
         }
         eventRepository.deleteById(id);
+    }
+
+    public List<EventDtoResponse> findEventsAfterDate(Long date) {
+        ZonedDateTime userDate = convertTimestampToZonedDateTime(date, "UTC");
+        List<Event> events =  eventRepository.findEventsAfterDate(userDate);
+        List<EventDtoResponse> eventDtoResponses = new ArrayList<>();
+
+        events.forEach(event -> eventDtoResponses.add(convertToDto(event)));
+
+        return eventDtoResponses;
     }
 }

@@ -4,7 +4,6 @@ import com.example.java_mp.dto.request.EventDtoRequest;
 import com.example.java_mp.dto.response.EventDtoResponse;
 import com.example.java_mp.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,5 +42,11 @@ public class EventController {
     public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
         eventService.deleteEvent(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/date/{date}")
+    public ResponseEntity<List<EventDtoResponse>> findEventsAfterDate(@PathVariable Long date) {
+        List<EventDtoResponse> events = eventService.findEventsAfterDate(date);
+        return ResponseEntity.ok(events);
     }
 }
