@@ -1,0 +1,42 @@
+# Ignore the HELP.md file
+HELP.md
+
+# Ignore all target/ directories
+target/
+# But do not ignore target/ directories in src/main and src/test
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Ignore Maven wrapper jar file
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS (Spring Tool Suite) ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Ignore all build/ directories
+build/
+# But do not ignore build/ directories in src/main and src/test
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
