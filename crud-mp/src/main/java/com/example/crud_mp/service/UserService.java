@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,19 +21,20 @@ import com.example.crud_mp.repository.UserRepository;
 @Service
 public class UserService {
 
+    private final PasswordEncoder passwordEncoder;
     private UserRepository userRepository;
     Logger logger = LoggerFactory.getLogger(CrudMpApplication.class);
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     public List<User> getAllUsers() {
         try {
             List<User> users = userRepository.findAllUsers();
             return users;
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error("Error getting all users: " + e.getMessage());
             throw e;
         }
@@ -41,7 +44,8 @@ public class UserService {
     public List<User> createUser(UserDtoRequest user) {
         validateUserDtoRequest(user);
         try {
-            User newUser = new User(user.getUsername(), user.getEmail(), user.getRole(), user.getPassword());
+            String hashedPassword = passwordEncoder.encode(user.getPassword());
+            User newUser = new User(user.getUsername(), user.getEmail(), user.getRole(), hashedPassword);
             userRepository.save(newUser);
             logger.info("User created: " + newUser.getId());
             return userRepository.findAllUsers();
