@@ -2,37 +2,35 @@ package com.example.crud_mp.model;
 
 import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrePersist;
 
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-import lombok.Getter;
-import lombok.Setter;
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
 
+    @javax.persistence.Id
     @Id
-    @Getter
     private UUID id;
 
-    @Getter
-    @Setter
+    @Column(nullable = false, name = "username")
     private String username;
 
-    @Getter
-    @Setter
+    @Column(nullable = false, name = "email", unique = true)
     private String email;
 
-    @Getter
-    @Setter
+    @Column(nullable = false, name = "role")
     private String role;
 
-    @Getter
-    @Setter
+    @Column(nullable = false, name = "password")
     private String password;
 
     public User(String username, String email, String role, String password) {
@@ -40,9 +38,6 @@ public class User {
         this.email = email;
         this.role = role;
         this.password = password;
-    }
-
-    public User() {
     }
 
     @PrePersist

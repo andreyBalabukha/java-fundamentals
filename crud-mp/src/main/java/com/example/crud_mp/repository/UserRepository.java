@@ -1,6 +1,7 @@
 package com.example.crud_mp.repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jdbc.repository.query.Query;
@@ -13,4 +14,6 @@ import com.example.crud_mp.model.User;
 public interface UserRepository extends CrudRepository<User, UUID> {
     @Query("SELECT * FROM users where role = 'user'")
     List<User> findAllUsers();
+
+    Optional<User> findByEmail(String email);
 }
