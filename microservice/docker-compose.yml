@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  micro-sender:
+    build:
+      context: ./micro-sender
+    ports:
+      - "8081:8080"
+    networks:
+      - sender
+
+  micro-recipient:
+    build:
+      context: ./micro-recipient
+    ports:
+      - "8082:8080"
+    networks:
+      - recipient
+
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    networks:
+      - sender
+      - recipient
+
+  micro-collector:
+    build:
+      context: ./micro-collector
+    ports:
+      - "8083:8080"
+    networks:
+      - recipient
+
+networks:
+  sender:
+  recipient:
