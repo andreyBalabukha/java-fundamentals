@@ -20,4 +20,11 @@ public class UserDtoRequest {
     @Getter
     @Setter
     private String role;
+
+    public UserDtoRequest(String username, String mail, String role, String password) {
+        this.username = username;
+        this.email = mail;
+        this.role = role;
+        this.password = password;
+    }
 }
