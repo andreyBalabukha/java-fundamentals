@@ -12,7 +12,8 @@ CREATE TABLE students (
         phone_number VARCHAR(15),
         primary_skill VARCHAR(100),
         created_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        updated_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE (name, surname, date_of_birth)  -- Ensuring no duplicate students
 );
 
 -- Create the subjects table
@@ -21,17 +22,20 @@ CREATE TABLE subjects (
         subject_name VARCHAR(100) NOT NULL,
         tutor VARCHAR(100) NOT NULL,
         created_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        updated_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE (subject_name)  -- Ensuring no duplicate subjects
 );
 
 -- Create the exam_results table
 CREATE TABLE exam_results (
         result_id SERIAL PRIMARY KEY,
-        student_id INT REFERENCES students(student_id) ON DELETE CASCADE,
-        subject_id INT REFERENCES subjects(subject_id) ON DELETE CASCADE,
+        student_id INT NOT NULL,
+        subject_id INT NOT NULL,
         mark DECIMAL(5, 2) CHECK (mark >= 0 AND mark <= 100),
         created_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        updated_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE,
+        FOREIGN KEY (subject_id) REFERENCES subjects(subject_id) ON DELETE CASCADE
 );
 
 -- Optional: Insert some initial data into students
@@ -52,3 +56,10 @@ VALUES
     (1, 1, 85.50),
     (1, 2, 90.00),
     (2, 1, 78.00);
+
+-- Create indexes for performance improvement
+CREATE INDEX idx_students_name ON students(name);
+CREATE INDEX idx_students_surname ON students(surname);
+CREATE INDEX idx_subjects_name ON subjects(subject_name);
+CREATE INDEX idx_exam_results_student ON exam_results(student_id);
+CREATE INDEX idx_exam_results_subject ON exam_results(subject_id);
